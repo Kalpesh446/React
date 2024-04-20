@@ -62,51 +62,75 @@ const CrudeApp = () => {
   return (
     <>
       <h1 className="text-center">React</h1>
-      <form className="w-50 m-auto">
+      <form className="w-50 mx-auto">
+        {/* First Name */}
         <div className="mb-3">
+          <label htmlFor="firstName" className="form-label">
+            First Name:
+          </label>
+          <input className="form-control" type="text" name="firstName" value={formData.firstName} placeholder="Enter your first name" />
+        </div>
+        {/* Last Name */}
+        <div className="mb-3">
+          <label htmlFor="lastName">Last Name:</label>
+          <input className="form-control" type="text" name="lastName" value={formData.lastName} placeholder="Enter your last name" />
+        </div>
+        {/* Email */}
+        <div className="mb-3">
+          <label htmlFor="email">Email:</label>
+          <input className="form-control" type="email" name="email" value={formData.email} placeholder="Enter your Email Id" />
+        </div>
+        {/* Phone number */}
+        <div className="mb-3">
+          <label htmlFor="phoneNumber">Phone Number:</label>
+          <input className="form-control" type="tel" name="phoneNumber" value={formData.phoneNumber} placeholder="Enter your Phone Number" />
+        </div>
+        {/* Password */}
+        <div className="mb-3">
+          <label htmlFor="password">Password:</label>
+          <input className="form-control" type="password" name="password" value={formData.password} placeholder="Enter your password" />
+        </div>
+        {/* Confirm Password */}
+        <div className="mb-3">
+          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <input className="form-control" type="password" name="confirmPassword" value={formData.confirmPassword} placeholder="Confirm your password" />
+        </div>
+        {/* Gender */}
+        <div className="mb-3">
+          <label htmlFor="gender">Gender:</label>
+          <select className="form-select ms-2" name="gender" value={formData.gender}>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        {/* Interest */}
+        <div className="mb-3">
+          <label htmlFor="interest">Interest:</label>
           <div>
-            <label htmlFor="firstName" className="form-label">
-              First Name:
+            <label className="form-check-label ms-2">
+              <input type="checkbox" name="coding" checked={formData.interests.includes("coding")} className="form-check-input" />
+              Coding
             </label>
-            <input className="form-control" type="text" name="firstName" value={formData.firstName} placeholder="Enter your first name" />
+            <label className="form-check-label ms-2">
+              <input type="checkbox" name="sports" checked={formData.interests.includes("sports")} className="form-check-input" />
+              Sports
+            </label>
+            <label className="form-check-label ms-2">
+              <input type="checkbox" name="reading" checked={formData.interests.includes("reading")} className="form-check-input" />
+              Reading
+            </label>
           </div>
-          <br />
-          <div>
-            <label htmlFor="lastName">Last Name:</label>
-            <input className="form-control" type="text" name="lastName" value={formData.lastName} placeholder="Enter your last name" />
-          </div>
-          <br />
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input className="form-control" type="email" name="email" value={formData.email} placeholder="Enter your Email Id" />
-          </div>
-          <br />
-          <div>
-            <label htmlFor="phoneNumber">Phone Number:</label>
-            <input className="form-control" type="number" name="phoneNumber" value={formData.phoneNumber} placeholder="Enter your Phone Number" />
-          </div>
-          <br />
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input className="form-control" type="password" name="password" value={formData.password} placeholder="Enter your password" />
-          </div>
-          <br />
-          <div>
-            <label htmlFor="password">Confirm Password:</label>
-            <input className="form-control" type="password" name="confirmPassword" value={formData.confirmPassword} placeholder="Enter your confirm password" />
-          </div>
-          <br />
-          <div>
-            <label htmlFor="gender">Gender :</label>
-            <select name="gender" value={formData.gender}>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <br />
+        </div>
+        {/* BirthDate */}
+        <div className="mb-3">
+          <label htmlFor="birthDate">Birthdate:</label>
+          <input className="form-control" type="date" name="birthdate" placeholder="Enter Your BirthDate" />
+        </div>
+        {/* Submit Button */}
+        <div className="text-center">
           <button type="submit" className="btn btn-primary">
-            submit
+            Submit
           </button>
         </div>
       </form>
