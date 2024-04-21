@@ -15,7 +15,7 @@ const CrudeApp = () => {
     birthData: "",
   });
 
-  const [errors, setErrors] = useState();
+  const [errors, setErrors] = useState({});
   console.log(formData);
 
   // const [data, setData] = useState({ name: "", email: "" });
@@ -95,8 +95,14 @@ const CrudeApp = () => {
       newErrors.email = "Invalid email formate";
     }
     if (!formData.phoneNumber) {
-      newErrors.phoneNumber = "Phone number is required";
+      newErrors.phoneNumber = "PhoneNumber is required";
     } else if (!isValidPhoneNumber(formData.phoneNumber)) {
+      newErrors.phoneNumber = "Must be 10 digit";
+    }
+
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+    } else if (!isValidPassword(formData.phoneNumber)) {
       newErrors.password = "Password must be at least 8 characters long and contain at least one symbol, one number";
     }
     if (!formData.confirmPassword) {
