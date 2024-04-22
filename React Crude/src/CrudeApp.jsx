@@ -12,7 +12,7 @@ const CrudeApp = () => {
     age: "",
     gender: "",
     interests: [],
-    birthData: "",
+    birthDate: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -102,7 +102,7 @@ const CrudeApp = () => {
 
     if (!formData.password) {
       newErrors.password = "Password is required";
-    } else if (!isValidPassword(formData.phoneNumber)) {
+    } else if (!isValidPassword(formData.password)) {
       newErrors.password = "Password must be at least 8 characters long and contain at least one symbol, one number";
     }
     if (!formData.confirmPassword) {
@@ -118,11 +118,11 @@ const CrudeApp = () => {
     if (!formData.gender) {
       newErrors.gender = "Gender is required";
     }
-    if (!formData.interests.length === 0) {
+    if (formData.interests.length === 0) {
       newErrors.interests = "Select at least one interest";
     }
-    if (!formData.birthData) {
-      newErrors.birthData = "Date of birth required";
+    if (!formData.birthDate) {
+      newErrors.birthDate = "Date of birth required";
     }
 
     setErrors(newErrors);
@@ -250,7 +250,8 @@ const CrudeApp = () => {
         {/* BirthDate */}
         <div className="mb-3">
           <label htmlFor="birthDate">Birthdate:</label>
-          <input className="form-control" type="date" name="birthdate" placeholder="Enter Your BirthDate" onChange={handleChange} />
+          <input className="form-control" type="date" name="birthDate" placeholder="Enter Your BirthDate" onChange={handleChange} />
+          {errors.birthDate && <div style={{ color: "red" }}>{errors.birthDate}</div>}
         </div>
         {/* Submit Button */}
         <div className="text-center">
