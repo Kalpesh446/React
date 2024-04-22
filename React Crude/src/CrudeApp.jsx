@@ -18,6 +18,18 @@ const CrudeApp = () => {
   const [errors, setErrors] = useState({});
   console.log(formData);
 
+  const [users, setUsers] = useState([]);
+  console.log(users);
+
+  useEffect(() => {
+    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+    setUsers(storedUsers);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("users", JSON.stringify(users));
+  }, [users]);
+
   // const [data, setData] = useState({ name: "", email: "" });
   // const [user, setUser] = useState(() => {
   //   const storedData = localStorage.getItem("userData");
@@ -136,7 +148,19 @@ const CrudeApp = () => {
 
     const isValid = validateForm();
     if (isValid) {
-      console.log("Form Submitted", formData);
+      setUsers([...users, formData]);
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        password: "",
+        confirmPassword: "",
+        age: "",
+        gender: "",
+        interests: [],
+        birthDate: "",
+      });
     } else {
       console.log("Form Validation Failed");
     }
@@ -160,11 +184,24 @@ const CrudeApp = () => {
   //   setUser([]);
   // };
 
+  const handleDelete = (index) => {
+    const updatedUsers = [...users];
+    updatedUsers.splice(index, 1);
+    setUsers(updatedUsers);
+  };
+
   // const handleDelete = (i) => {
   //   const updatedUser = user.filter((e, index) => index !== i);
   //   setUser(updatedUser);
   // };
-
+  const handleEdit = (index) => {
+    const userToEdit = users[index];
+    setFormData(userToEdit);
+    handleDelete(index);
+  };
+  const handleAllDelete = () => {
+    setUsers([]);
+  };
   // const handleEdit = (e, i) => {
   //   setData({ ...data, name: e.name, email: e.email });
   //   setEditingIndex(i);
@@ -261,7 +298,7 @@ const CrudeApp = () => {
         </div>
       </form>
 
-      {/* {user.length > 0 ? (
+      {users.length > 0 ? (
         <table className="table w-50 m-auto table-striped table-responsive-lg border">
           <thead>
             <tr>
@@ -276,7 +313,7 @@ const CrudeApp = () => {
             </tr>
           </thead>
           <tbody>
-            {user?.map((e, i) => {
+            {users?.map((e, i) => {
               return (
                 <tr key={i}>
                   <td>{e.name}</td>
@@ -298,7 +335,7 @@ const CrudeApp = () => {
         </table>
       ) : (
         ""
-      )} */}
+      )}
     </>
   );
 };

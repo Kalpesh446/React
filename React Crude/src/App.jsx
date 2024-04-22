@@ -5,8 +5,8 @@ import FormwithYup from "./FormwithYup";
 function App() {
   return (
     <>
-      {/* <CrudeApp /> */}
-      <FormwithYup />
+      <CrudeApp />
+      {/* <FormwithYup /> */}
     </>
   );
 }
