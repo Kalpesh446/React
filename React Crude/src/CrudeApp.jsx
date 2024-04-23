@@ -317,7 +317,7 @@ const CrudeApp = () => {
                   <td>{e.confirmPassword}</td>
                   <td>{e.age}</td>
                   <td>{e.gender}</td>
-                  <td>{e.interests}</td>
+                  <td>{e.interests.join(",")}</td>
                   <td>{e.birthDate}</td>
                   <td>
                     <button className="btn btn-success" onClick={() => handleEdit(e, i)}>
