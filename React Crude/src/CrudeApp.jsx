@@ -16,10 +16,9 @@ const CrudeApp = () => {
   });
 
   const [errors, setErrors] = useState({});
-  console.log(formData);
 
   const [users, setUsers] = useState([]);
-  console.log(users);
+  const [editingIndex, setEditingIndex] = useState(null);
 
   useEffect(() => {
     const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
@@ -30,17 +29,6 @@ const CrudeApp = () => {
     localStorage.setItem("users", JSON.stringify(users));
   }, [users]);
 
-  // const [data, setData] = useState({ name: "", email: "" });
-  // const [user, setUser] = useState(() => {
-  //   const storedData = localStorage.getItem("userData");
-  //   return storedData ? JSON.parse(storedData) : [];
-  // });
-  // const [editingIndex, setEditingIndex] = useState(null);
-
-  // useEffect(() => {
-  //   localStorage.setItem("userData", JSON.stringify(user));
-  // }, [user]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -48,9 +36,6 @@ const CrudeApp = () => {
       [name]: value,
     });
   };
-  // const handleChange = (e) => {
-  //   setData({ ...data, [e.target.name]: e.target.value });
-  // };
 
   const isValidEmail = (email) => {
     // Regular expression for basic email validation
@@ -148,7 +133,18 @@ const CrudeApp = () => {
 
     const isValid = validateForm();
     if (isValid) {
-      setUsers([...users, formData]);
+      if (editingIndex !== null) {
+        // If editing, update the user at editingIndex
+        const updatedUsers = [...users];
+        updatedUsers[editingIndex] = formData;
+        setUsers(updatedUsers);
+        setEditingIndex(null); // Reset editing index
+      } else {
+        // If not editing, add a new user
+        setUsers([...users, formData]);
+      }
+
+      // Reset form data
       setFormData({
         firstName: "",
         lastName: "",
@@ -165,24 +161,6 @@ const CrudeApp = () => {
       console.log("Form Validation Failed");
     }
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (data.name === "" || data.email === "") {
-  //     alert("Please fill in all fields");
-  //   } else if (editingIndex != null && editingIndex !== undefined) {
-  //     const updatedUser = [...user];
-  //     updatedUser[editingIndex] = data;
-  //     setUser(updatedUser);
-  //     setEditingIndex(null);
-  //   } else {
-  //     setUser([...user, data]);
-  //   }
-  //   setData({ name: "", email: "" });
-  // };
-
-  // const handleAllDelete = () => {
-  //   setUser([]);
-  // };
 
   const handleDelete = (index) => {
     const updatedUsers = [...users];
@@ -190,22 +168,28 @@ const CrudeApp = () => {
     setUsers(updatedUsers);
   };
 
-  // const handleDelete = (i) => {
-  //   const updatedUser = user.filter((e, index) => index !== i);
-  //   setUser(updatedUser);
-  // };
-  const handleEdit = (index) => {
-    const userToEdit = users[index];
-    setFormData(userToEdit);
-    handleDelete(index);
+  const handleEdit = (e, i) => {
+    console.log(i);
+    console.log(e);
+    setFormData({
+      ...formData,
+      firstName: e.firstName,
+      lastName: e.lastName,
+      email: e.email,
+      phoneNumber: e.phoneNumber,
+      password: e.password,
+      confirmPassword: e.confirmPassword,
+      age: e.age,
+      gender: e.gender,
+      interests: e.interests,
+      birthDate: e.birthDate,
+    });
+    setEditingIndex(i);
   };
+
   const handleAllDelete = () => {
     setUsers([]);
   };
-  // const handleEdit = (e, i) => {
-  //   setData({ ...data, name: e.name, email: e.email });
-  //   setEditingIndex(i);
-  // };
 
   return (
     <>
@@ -287,7 +271,7 @@ const CrudeApp = () => {
         {/* BirthDate */}
         <div className="mb-3">
           <label htmlFor="birthDate">Birthdate:</label>
-          <input className="form-control" type="date" name="birthDate" placeholder="Enter Your BirthDate" onChange={handleChange} />
+          <input className="form-control" type="date" name="birthDate" value={formData.birthDate} placeholder="Enter Your BirthDate" onChange={handleChange} />
           {errors.birthDate && <div style={{ color: "red" }}>{errors.birthDate}</div>}
         </div>
         {/* Submit Button */}
@@ -302,8 +286,16 @@ const CrudeApp = () => {
         <table className="table w-50 m-auto table-striped table-responsive-lg border">
           <thead>
             <tr>
-              <th>Name</th>
+              <th>First Name</th>
+              <th>Last Name</th>
               <th>Email</th>
+              <th>Phone Number</th>
+              <th>Password</th>
+              <th>Confirm Password</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Interest</th>
+              <th>BirthDate</th>
               <th>Actions</th>
               <th>
                 <button className="btn btn-danger ms-4" onClick={handleAllDelete}>
@@ -314,10 +306,19 @@ const CrudeApp = () => {
           </thead>
           <tbody>
             {users?.map((e, i) => {
+              console.log(e);
               return (
                 <tr key={i}>
-                  <td>{e.name}</td>
+                  <td>{e.firstName}</td>
+                  <td>{e.lastName}</td>
                   <td>{e.email}</td>
+                  <td>{e.phoneNumber}</td>
+                  <td>{e.password}</td>
+                  <td>{e.confirmPassword}</td>
+                  <td>{e.age}</td>
+                  <td>{e.gender}</td>
+                  <td>{e.interests}</td>
+                  <td>{e.birthDate}</td>
                   <td>
                     <button className="btn btn-success" onClick={() => handleEdit(e, i)}>
                       Edit
