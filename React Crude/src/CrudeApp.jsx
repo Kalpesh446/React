@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./index.css";
 
 const CrudeApp = () => {
+  // form Data state to store
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -17,18 +18,18 @@ const CrudeApp = () => {
 
   const [errors, setErrors] = useState({});
 
-  const [users, setUsers] = useState([]);
+  // To store Localstorage
+  const [users, setUsers] = useState(() => {
+    const storedData = localStorage.getItem("userData");
+    return storedData ? JSON.parse(storedData) : [];
+  });
   const [editingIndex, setEditingIndex] = useState(null);
 
   useEffect(() => {
-    const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-    setUsers(storedUsers);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("userData", JSON.stringify(users));
   }, [users]);
 
+  // input change function
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -37,6 +38,7 @@ const CrudeApp = () => {
     });
   };
 
+  // validation without any liabrary
   const isValidEmail = (email) => {
     // Regular expression for basic email validation
     const emailRegex = /^\S+@\S+\.\S+$/;
@@ -62,6 +64,7 @@ const CrudeApp = () => {
     return parseInt(age) >= 18 && parseInt(age) <= 100;
   };
 
+  // checkbox handle function
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
 
@@ -126,8 +129,7 @@ const CrudeApp = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  console.log(errors);
-
+  // submit handle function
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -162,12 +164,14 @@ const CrudeApp = () => {
     }
   };
 
+  // delete handle function
   const handleDelete = (index) => {
     const updatedUsers = [...users];
     updatedUsers.splice(index, 1);
     setUsers(updatedUsers);
   };
 
+  // handler edit function
   const handleEdit = (e, i) => {
     console.log(i);
     console.log(e);
@@ -187,6 +191,7 @@ const CrudeApp = () => {
     setEditingIndex(i);
   };
 
+  // delete all form value function
   const handleAllDelete = () => {
     setUsers([]);
   };
