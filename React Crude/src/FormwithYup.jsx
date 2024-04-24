@@ -79,6 +79,7 @@ const FormwithYup = () => {
     });
   };
 
+  // submit handle function
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -92,6 +93,36 @@ const FormwithYup = () => {
       });
       setErrors(newErrors);
     }
+  };
+
+  // delete handle function
+  const handleDelete = (index) => {
+    const updatedUsers = [...users];
+    updatedUsers.splice(index, 1);
+    setUsers(updatedUsers);
+  };
+
+  // handler edit function
+  const handleEdit = (e, i) => {
+    setFormData({
+      ...formData,
+      firstName: e.firstName,
+      lastName: e.lastName,
+      email: e.email,
+      phoneNumber: e.phoneNumber,
+      password: e.password,
+      confirmPassword: e.confirmPassword,
+      age: e.age,
+      gender: e.gender,
+      interests: e.interests,
+      birthDate: e.birthDate,
+    });
+    setEditingIndex(i);
+  };
+
+  // delete all form value function
+  const handleAllDelete = () => {
+    setUsers([]);
   };
 
   return (
