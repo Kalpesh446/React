@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import "./index.css";
 
 const FormwithYup = () => {
+  // form Data state to store
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -57,17 +58,6 @@ const FormwithYup = () => {
     });
   };
 
-  // const [data, setData] = useState({ name: "", email: "" });
-  // const [user, setUser] = useState(() => {
-  //   const storedData = localStorage.getItem("userData");
-  //   return storedData ? JSON.parse(storedData) : [];
-  // });
-  // const [editingIndex, setEditingIndex] = useState(null);
-
-  // useEffect(() => {
-  //   localStorage.setItem("userData", JSON.stringify(user));
-  // }, [user]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -75,9 +65,6 @@ const FormwithYup = () => {
       [name]: value,
     });
   };
-  // const handleChange = (e) => {
-  //   setData({ ...data, [e.target.name]: e.target.value });
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,34 +80,6 @@ const FormwithYup = () => {
       setErrors(newErrors);
     }
   };
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (data.name === "" || data.email === "") {
-  //     alert("Please fill in all fields");
-  //   } else if (editingIndex != null && editingIndex !== undefined) {
-  //     const updatedUser = [...user];
-  //     updatedUser[editingIndex] = data;
-  //     setUser(updatedUser);
-  //     setEditingIndex(null);
-  //   } else {
-  //     setUser([...user, data]);
-  //   }
-  //   setData({ name: "", email: "" });
-  // };
-
-  // const handleAllDelete = () => {
-  //   setUser([]);
-  // };
-
-  // const handleDelete = (i) => {
-  //   const updatedUser = user.filter((e, index) => index !== i);
-  //   setUser(updatedUser);
-  // };
-
-  // const handleEdit = (e, i) => {
-  //   setData({ ...data, name: e.name, email: e.email });
-  //   setEditingIndex(i);
-  // };
 
   return (
     <>
