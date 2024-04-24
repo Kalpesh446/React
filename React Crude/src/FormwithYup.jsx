@@ -18,8 +18,19 @@ const FormwithYup = () => {
   });
 
   const [errors, setErrors] = useState({});
-  console.log(formData);
 
+  // To store Localstorage
+  const [users, setUsers] = useState(() => {
+    const storedData = localStorage.getItem("userData");
+    return storedData ? JSON.parse(storedData) : [];
+  });
+  const [editingIndex, setEditingIndex] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem("userData", JSON.stringify(users));
+  }, [users]);
+
+  // Validation with Yup liabrary
   const validationSchema = Yup.object({
     firstName: Yup.string().required("First Name is required"),
     lastName: Yup.string().required("Last Name is required"),
@@ -43,6 +54,7 @@ const FormwithYup = () => {
     birthDate: Yup.date().required("Date of Birth is required"),
   });
 
+  // checkbox handle function
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
 
@@ -58,6 +70,7 @@ const FormwithYup = () => {
     });
   };
 
+  // input change function
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
