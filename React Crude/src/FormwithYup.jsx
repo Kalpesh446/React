@@ -79,9 +79,7 @@ const FormwithYup = () => {
     });
   };
 
-  // submit handle function
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const validateForm = async () => {
     try {
       await validationSchema.validate(formData, { abortEarly: false });
       console.log("Form Submitted", formData);
@@ -92,6 +90,39 @@ const FormwithYup = () => {
         newErrors[err.path] = err.message;
       });
       setErrors(newErrors);
+    }
+  };
+  // submit handle function
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const isValid = validateForm();
+    if (isValid) {
+      if (editingIndex !== null) {
+        // If editing, update the user at editingIndex
+        const updatedUsers = [...users];
+        updatedUsers[editingIndex] = formData;
+        setUsers(updatedUsers);
+        setEditingIndex(null); // Reset editing index
+      } else {
+        // If not editing, add a new user
+        setUsers([...users, formData]);
+      }
+
+      // Reset form data
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        password: "",
+        confirmPassword: "",
+        age: "",
+        gender: "",
+        interests: [],
+        birthDate: "",
+      });
+    } else {
+      console.log("Form Validation Failed");
     }
   };
 
@@ -215,13 +246,21 @@ const FormwithYup = () => {
           </button>
         </div>
       </form>
-
-      {/* {user.length > 0 ? (
+      {/* show all user form data */}
+      {users.length > 0 ? (
         <table className="table w-50 m-auto table-striped table-responsive-lg border">
           <thead>
             <tr>
-              <th>Name</th>
+              <th>First Name</th>
+              <th>Last Name</th>
               <th>Email</th>
+              <th>Phone Number</th>
+              <th>Password</th>
+              <th>Confirm Password</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Interest</th>
+              <th>BirthDate</th>
               <th>Actions</th>
               <th>
                 <button className="btn btn-danger ms-4" onClick={handleAllDelete}>
@@ -231,11 +270,20 @@ const FormwithYup = () => {
             </tr>
           </thead>
           <tbody>
-            {user?.map((e, i) => {
+            {users?.map((e, i) => {
+              console.log(e);
               return (
                 <tr key={i}>
-                  <td>{e.name}</td>
+                  <td>{e.firstName}</td>
+                  <td>{e.lastName}</td>
                   <td>{e.email}</td>
+                  <td>{e.phoneNumber}</td>
+                  <td>{e.password}</td>
+                  <td>{e.confirmPassword}</td>
+                  <td>{e.age}</td>
+                  <td>{e.gender}</td>
+                  <td>{e.interests.join(",")}</td>
+                  <td>{e.birthDate}</td>
                   <td>
                     <button className="btn btn-success" onClick={() => handleEdit(e, i)}>
                       Edit
@@ -253,7 +301,7 @@ const FormwithYup = () => {
         </table>
       ) : (
         ""
-      )} */}
+      )}
     </>
   );
 };

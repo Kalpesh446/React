@@ -23,6 +23,7 @@ const CrudeApp = () => {
     const storedData = localStorage.getItem("userData");
     return storedData ? JSON.parse(storedData) : [];
   });
+  console.log(users);
   const [editingIndex, setEditingIndex] = useState(null);
 
   useEffect(() => {
@@ -284,7 +285,7 @@ const CrudeApp = () => {
           </button>
         </div>
       </form>
-
+      {/* show all user form data */}
       {users.length > 0 ? (
         <table className="table w-50 m-auto table-striped table-responsive-lg border">
           <thead>
@@ -309,7 +310,6 @@ const CrudeApp = () => {
           </thead>
           <tbody>
             {users?.map((e, i) => {
-              console.log(e);
               return (
                 <tr key={i}>
                   <td>{e.firstName}</td>
