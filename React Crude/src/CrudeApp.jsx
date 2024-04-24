@@ -173,8 +173,6 @@ const CrudeApp = () => {
 
   // handler edit function
   const handleEdit = (e, i) => {
-    console.log(i);
-    console.log(e);
     setFormData({
       ...formData,
       firstName: e.firstName,
