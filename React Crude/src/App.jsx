@@ -1,12 +1,12 @@
 import "./App.css";
-import CrudeApp from "./CrudeApp";
-import FormwithYup from "./FormwithYup";
+import CrudeApp from "./Components/CrudeApp";
+import FormwithYup from "./Components/FormwithYup";
 
 function App() {
   return (
     <>
-      {/* <CrudeApp /> */}
-      <FormwithYup />
+      <CrudeApp />
+      {/* <FormwithYup /> */}
     </>
   );
 }
