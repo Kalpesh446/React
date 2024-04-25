@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./index.css";
-
 const CrudeApp = () => {
   // form Data state to store
   const [formData, setFormData] = useState({

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
-import "./index.css";
 
 const FormwithYup = () => {
   // form Data state to store
