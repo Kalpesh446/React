@@ -247,21 +247,21 @@ const FormwithYup = () => {
       </form>
       {/* show all user form data */}
       {users.length > 0 ? (
-        <table className="table table-bordered table-hover">
+        <table className="table table-striped table-bordered table-hover">
           <thead className="thead-dark">
             <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Phone Number</th>
-              <th>Password</th>
-              <th>Confirm Password</th>
-              <th>Age</th>
-              <th>Gender</th>
-              <th>Interest</th>
-              <th>BirthDate</th>
-              <th>Actions</th>
-              <th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone Number</th>
+              <th scope="col">Password</th>
+              <th scope="col">Confirm Password</th>
+              <th scope="col">Age</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Interest</th>
+              <th scope="col">Birth Date</th>
+              <th scope="col">Actions</th>
+              <th scope="col">
                 <button className="btn btn-danger ms-4" onClick={handleAllDelete}>
                   Delete All
                 </button>
@@ -269,33 +269,30 @@ const FormwithYup = () => {
             </tr>
           </thead>
           <tbody>
-            {users?.map((e, i) => {
-              console.log(e);
-              return (
-                <tr key={i}>
-                  <td>{e.firstName}</td>
-                  <td>{e.lastName}</td>
-                  <td>{e.email}</td>
-                  <td>{e.phoneNumber}</td>
-                  <td>{e.password}</td>
-                  <td>{e.confirmPassword}</td>
-                  <td>{e.age}</td>
-                  <td>{e.gender}</td>
-                  <td>{e.interests.join(", ")}</td>
-                  <td>{e.birthDate}</td>
-                  <td>
-                    <button className="btn btn-success" onClick={() => handleEdit(e, i)}>
-                      Edit
-                    </button>
-                  </td>
-                  <td className="border border-slate-700">
-                    <button className="btn btn-danger" onClick={() => handleDelete(i)}>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {users?.map((e, i) => (
+              <tr key={i}>
+                <td>{e.firstName}</td>
+                <td>{e.lastName}</td>
+                <td>{e.email}</td>
+                <td>{e.phoneNumber}</td>
+                <td>{e.password}</td>
+                <td>{e.confirmPassword}</td>
+                <td>{e.age}</td>
+                <td>{e.gender}</td>
+                <td>{e.interests.join(", ")}</td>
+                <td>{e.birthDate}</td>
+                <td>
+                  <button className="btn btn-success" onClick={() => handleEdit(e, i)}>
+                    Edit
+                  </button>
+                </td>
+                <td>
+                  <button className="btn btn-danger" onClick={() => handleDelete(i)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       ) : (
