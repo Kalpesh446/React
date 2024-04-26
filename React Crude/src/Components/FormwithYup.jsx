@@ -247,8 +247,8 @@ const FormwithYup = () => {
       </form>
       {/* show all user form data */}
       {users.length > 0 ? (
-        <table className="table w-50 m-auto table-striped table-responsive-lg border">
-          <thead>
+        <table className="table table-bordered table-hover">
+          <thead className="thead-dark">
             <tr>
               <th>First Name</th>
               <th>Last Name</th>
@@ -281,7 +281,7 @@ const FormwithYup = () => {
                   <td>{e.confirmPassword}</td>
                   <td>{e.age}</td>
                   <td>{e.gender}</td>
-                  <td>{e.interests.join(",")}</td>
+                  <td>{e.interests.join(", ")}</td>
                   <td>{e.birthDate}</td>
                   <td>
                     <button className="btn btn-success" onClick={() => handleEdit(e, i)}>
