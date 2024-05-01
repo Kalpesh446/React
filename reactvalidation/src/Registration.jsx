@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { GlobalStyle } from "./Styles/globalStyles";
 import { useFormik } from "formik";
+import { signUpSchema } from "./schemas";
 
 const initialValues = {
   name: "",
@@ -12,10 +13,12 @@ const initialValues = {
 const Registration = () => {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
+    validationSchema: signUpSchema,
     onSubmit: (values) => {
       console.log("🚀 ~   file: Registration.jsx:9 ~   Registration ~   values:", values);
     },
   });
+  console.log("🚀 ~   file: Registration.jsx:22 ~   Registration ~   errors:", errors);
   return (
     <>
       <GlobalStyle />
