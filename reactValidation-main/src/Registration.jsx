@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { GlobalStyle } from "./Styles/globalStyles";
 import { useFormik } from "formik";
@@ -12,11 +12,15 @@ const initialValues = {
 };
 
 const Registration = () => {
+  const [userList, setUserList] = useState([]);
+
+  console.log("🚀 ~   file: Registration.jsx:16 ~   Registration ~   userList:", userList);
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues,
     validationSchema: signUpSchema,
     onSubmit: (values, action) => {
       console.log("🚀 ~ file: Registration.jsx ~ line 11 ~ Registration ~ values", values);
+      setUserList([...userList, values]);
       action.resetForm();
     },
   });
@@ -89,6 +93,27 @@ const Registration = () => {
             </div>
           </div>
         </div>
+        {/* Table to display user details */}
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>Confirm Password</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userList.map((user, index) => (
+              <tr key={index}>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.password}</td>
+                <td>{user.confirm_password}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </Wrapper>
     </>
   );
