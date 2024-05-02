@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { GlobalStyle } from "./Styles/globalStyles";
 import { useFormik } from "formik";
 import { signUpSchema } from "./schemas";
+import { Link } from "react-router-dom";
 
 const initialValues = {
   name: "",
@@ -78,9 +79,11 @@ const Registration = () => {
                     <a href="#" className="">
                       Want to register using Gmail?
                     </a>
+                    {/* <Link to={{ pathname: "/user-details" }}> */}
                     <button className="input-button" type="submit">
                       Registration
                     </button>
+                    {/* </Link> */}
                   </div>
                 </form>
                 <p className="sign-up">
@@ -94,7 +97,7 @@ const Registration = () => {
           </div>
         </div>
         {/* Table to display user details */}
-        <table>
+        {/* <table>
           <thead>
             <tr>
               <th>Name</th>
@@ -113,7 +116,7 @@ const Registration = () => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
       </Wrapper>
     </>
   );
