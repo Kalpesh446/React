@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { GlobalStyle } from "./Styles/globalStyles";
 import { useFormik } from "formik";
 import { signUpSchema } from "./schemas";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const initialValues = {
   name: "",
@@ -15,14 +15,27 @@ const initialValues = {
 const Registration = () => {
   const [userList, setUserList] = useState([]);
 
+  useEffect(() => {
+    const storedUserList = localStorage.getItem("userList");
+    if (storedUserList) {
+      setUserList(JSON.parse(storedUserList));
+    }
+  }, []);
+
+  let history = useNavigate();
+
   console.log("🚀 ~   file: Registration.jsx:16 ~   Registration ~   userList:", userList);
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues,
     validationSchema: signUpSchema,
     onSubmit: (values, action) => {
       console.log("🚀 ~ file: Registration.jsx ~ line 11 ~ Registration ~ values", values);
-      setUserList([...userList, values]);
+      // setUserList([...userList, values]);
+      setUserList((prevUserList) => [...prevUserList, values]);
+      // Save the updated userList to local storage
+      localStorage.setItem("userList", JSON.stringify([...userList, values]));
       action.resetForm();
+      history("/user-details");
     },
   });
   console.log("🚀 ~ file: Registration.jsx ~ line 25 ~ Registration ~ errors", errors);
@@ -79,11 +92,9 @@ const Registration = () => {
                     <a href="#" className="">
                       Want to register using Gmail?
                     </a>
-                    {/* <Link to={{ pathname: "/user-details" }}> */}
                     <button className="input-button" type="submit">
                       Registration
                     </button>
-                    {/* </Link> */}
                   </div>
                 </form>
                 <p className="sign-up">
@@ -96,27 +107,6 @@ const Registration = () => {
             </div>
           </div>
         </div>
-        {/* Table to display user details */}
-        {/* <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Password</th>
-              <th>Confirm Password</th>
-            </tr>
-          </thead>
-          <tbody>
-            {userList.map((user, index) => (
-              <tr key={index}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.password}</td>
-                <td>{user.confirm_password}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
       </Wrapper>
     </>
   );
