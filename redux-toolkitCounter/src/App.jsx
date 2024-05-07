@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import { increment, decrement, incrementByAmount, multiply } from "./redux/counter/counterSlice";
+import Calculation from "./components/Calculation";
 
 function App() {
   const count = useSelector((state) => state.counter.value);
@@ -25,6 +26,7 @@ function App() {
           incrementByAmount (5)
         </button>
       </div>
+      <Calculation />
     </>
   );
 }
