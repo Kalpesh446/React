@@ -1,14 +1,26 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const FakeApi = () => {
   const [data, setData] = useState([]);
   const BaseUrl = "https://fakestoreapi.com/products";
 
+  // first way to call api
   const apiProduct = async () => {
     const response = await fetch(BaseUrl);
     const calljson = await response.json();
     setData(calljson);
   };
+  // second way to call api
+
+  // const apiProduct = async () => {
+  //   try {
+  //     const res = await axios.get(BaseUrl);
+  //     console.log(res.data);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
 
   useEffect(() => {
     apiProduct();
