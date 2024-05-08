@@ -3,6 +3,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import { increment, decrement, incrementByAmount, multiply } from "./redux/counter/counterSlice";
 import Calculation from "./components/Calculation";
+import FakeApi from "./components/FakeApi";
 
 function App() {
   const count = useSelector((state) => state.counter.value);
@@ -27,6 +28,7 @@ function App() {
         </button>
       </div>
       <Calculation />
+      <FakeApi />
     </>
   );
 }
