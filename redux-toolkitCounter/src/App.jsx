@@ -13,16 +13,20 @@ function App() {
     <>
       <Navbar />
       <div className="container">
+        {/* substraction */}
         <button className="button" onClick={() => dispatch(decrement())}>
           -
         </button>
         <div className="main-content">This is main {count}</div>
+        {/* addition */}
         <button className="button" onClick={() => dispatch(increment())}>
           +
         </button>
+        {/* multiply */}
         <button className="button" onClick={() => dispatch(multiply())}>
           *
         </button>
+        {/* division */}
         <button className="button" onClick={() => dispatch(division())}>
           /
         </button>
