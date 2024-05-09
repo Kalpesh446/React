@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import { increment, decrement, incrementByAmount, multiply } from "./redux/counter/counterSlice";
+import { increment, decrement, incrementByAmount, multiply, division } from "./redux/counter/counterSlice";
 import Calculation from "./components/Calculation";
 import FakeApi from "./components/FakeApi";
 
@@ -22,6 +22,9 @@ function App() {
         </button>
         <button className="button" onClick={() => dispatch(multiply())}>
           *
+        </button>
+        <button className="button" onClick={() => dispatch(division())}>
+          /
         </button>
         <button className="button" onClick={() => dispatch(incrementByAmount(5))}>
           incrementByAmount (5)
