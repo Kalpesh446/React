@@ -19,6 +19,7 @@ const Calculation = () => {
         Addition: {value1 + value2} <br />
         Subtraction: {value1 - value2} <br />
         Multiplication: {value1 * value2} <br />
+        Modulo: {value2 !== 0 ? value1 % value2 : "modulo  by zero not allowed"} <br />
         Division: {value2 !== 0 ? (value1 / value2).toFixed(2) : "Division by zero not allowed"}
       </div>
     </div>
