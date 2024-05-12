@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { signUpSchema } from "./schemas";
 import { useNavigate } from "react-router-dom";
 
+// all form field value
 const initialValues = {
   name: "",
   email: "",
@@ -16,6 +17,7 @@ const Registration = () => {
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
+    // to store local storage
     const storedUserList = localStorage.getItem("userList");
     if (storedUserList) {
       setUserList(JSON.parse(storedUserList));
