@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Userdetails = () => {
+  // userdetails state to all details
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
+    // get data from local storage
     const storedUserList = localStorage.getItem("userList");
     if (storedUserList) {
       setUserList(JSON.parse(storedUserList));
